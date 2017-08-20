@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lower limit:</strong>
+  <%= @bmi_range.lower_limit %>
+</p>
+
+<p>
+  <strong>Upper limit:</strong>
+  <%= @bmi_range.upper_limit %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @bmi_range.category %>
+</p>
+
+<%= link_to 'Edit', edit_bmi_range_path(@bmi_range) %> |
+<%= link_to 'Back', bmi_ranges_path %>

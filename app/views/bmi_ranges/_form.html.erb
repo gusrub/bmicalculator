@@ -1,0 +1,32 @@
+<%= form_with(model: bmi_range, local: true) do |form| %>
+  <% if bmi_range.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bmi_range.errors.count, "error") %> prohibited this bmi_range from being saved:</h2>
+
+      <ul>
+      <% bmi_range.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :lower_limit %>
+    <%= form.text_field :lower_limit, id: :bmi_range_lower_limit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :upper_limit %>
+    <%= form.text_field :upper_limit, id: :bmi_range_upper_limit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.number_field :category, id: :bmi_range_category %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
