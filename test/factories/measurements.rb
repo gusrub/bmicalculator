@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :measurement do
-    User nil
-    BmiRange nil
+    user
+    bmi_range do
+      BmiRange.first || create(:bmi_range)
+    end
   end
 end

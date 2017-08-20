@@ -47,7 +47,6 @@ group :development, :test do
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'dotenv-rails'
-  gem 'minitest-reporters' 
 end
 
 group :development do
@@ -55,6 +54,12 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'letter_opener'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'minitest-reporters'
+  gem 'minitest-around'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
