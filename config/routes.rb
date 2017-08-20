@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root to: 'welcome#index'
+
+  devise_for :users
   resources :measurements
   resources :bmi_ranges
   resources :users

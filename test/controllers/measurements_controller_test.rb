@@ -8,6 +8,7 @@ class MeasurementsControllerTest < ActionDispatch::IntegrationTest
     end
     @measurement = Measurement.last
     @new_measurement = build(:measurement)
+    sign_in_valid_user
   end
 
   test "should get index" do
