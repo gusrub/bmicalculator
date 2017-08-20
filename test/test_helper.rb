@@ -6,11 +6,18 @@ Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
+  include Devise::Test::IntegrationHelpers
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def sign_in_valid_user
+    user = create(:user)
+    user.confirm
+    sign_in user
+  end
 
   def validates_presence(attribute)
     instance_name = self.class.name.gsub(/Test/, '').underscore.to_sym
