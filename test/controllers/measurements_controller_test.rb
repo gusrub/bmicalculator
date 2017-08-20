@@ -2,7 +2,12 @@ require 'test_helper'
 
 class MeasurementsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @measurement = measurements(:one)
+    ranges = create_list(:bmi_range, BmiRange.categories.keys.count)
+    ranges.each do |range|
+      create(:measurement, bmi_range: range)
+    end
+    @measurement = Measurement.last
+    @new_measurement = build(:measurement)
   end
 
   test "should get index" do
@@ -17,7 +22,7 @@ class MeasurementsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create measurement" do
     assert_difference('Measurement.count') do
-      post measurements_url, params: { measurement: { BmiRange_id: @measurement.BmiRange_id, User_id: @measurement.User_id } }
+      post measurements_url, params: { measurement: { bmi_range_id: @new_measurement.bmi_range_id, user_id: @new_measurement.user_id } }
     end
 
     assert_redirected_to measurement_url(Measurement.last)
@@ -34,7 +39,7 @@ class MeasurementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update measurement" do
-    patch measurement_url(@measurement), params: { measurement: { BmiRange_id: @measurement.BmiRange_id, User_id: @measurement.User_id } }
+    patch measurement_url(@measurement), params: { measurement: { bmi_range_id: @measurement.bmi_range_id, user_id: @measurement.user_id } }
     assert_redirected_to measurement_url(@measurement)
   end
 

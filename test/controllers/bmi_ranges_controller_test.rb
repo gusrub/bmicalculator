@@ -2,7 +2,11 @@ require 'test_helper'
 
 class BmiRangesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @bmi_range = bmi_ranges(:one)
+    (BmiRange.categories.keys - ["obese_class_3"]).each do |category|
+      create(:bmi_range, category: BmiRange.categories[category.to_sym])
+    end
+    @bmi_range = BmiRange.last
+    @new_bmi_range = build(:bmi_range, category: BmiRange.categories[:obese_class_3])
   end
 
   test "should get index" do
@@ -17,7 +21,7 @@ class BmiRangesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create bmi_range" do
     assert_difference('BmiRange.count') do
-      post bmi_ranges_url, params: { bmi_range: { category: @bmi_range.category, lower_limit: @bmi_range.lower_limit, upper_limit: @bmi_range.upper_limit } }
+      post bmi_ranges_url, params: { bmi_range: { category: @new_bmi_range.category, lower_limit: @new_bmi_range.lower_limit, upper_limit: @new_bmi_range.upper_limit } }
     end
 
     assert_redirected_to bmi_range_url(BmiRange.last)

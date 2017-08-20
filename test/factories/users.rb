@@ -1,12 +1,22 @@
 FactoryGirl.define do
   factory :user do
-    email "MyString"
-    first_name "MyString"
-    last_name "MyString"
-    password "MyString"
-    dob "2017-08-19"
-    gender 1
-    role 1
-    picture "MyText"
+    email { Faker::Internet.safe_email }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    password { Faker::Internet.password }
+    dob { Faker::Date.birthday }
+    gender { User.genders.keys.sample }
+    role { User.roles.keys.sample }
+    picture nil
+
+    factory :user_with_measurements do
+      transient do
+        measurements_count 3
+      end
+
+      after_create do |user, evaluator|
+        create_list(:measurement, measurements_count, user: user)
+      end
+    end
   end
 end

@@ -69,6 +69,6 @@ class MeasurementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def measurement_params
-      params.require(:measurement).permit(:User_id, :BmiRange_id)
+      params.require(:measurement).permit(:user_id, :bmi_range_id)
     end
 end
