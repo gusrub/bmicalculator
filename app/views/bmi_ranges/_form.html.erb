@@ -1,32 +1,19 @@
-<%= form_with(model: bmi_range, local: true) do |form| %>
-  <% if bmi_range.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(bmi_range.errors.count, "error") %> prohibited this bmi_range from being saved:</h2>
-
-      <ul>
-      <% bmi_range.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: bmi_range, local: true, class: "form-small") do |form| %>
 
   <div class="field">
-    <%= form.label :lower_limit %>
-    <%= form.text_field :lower_limit, id: :bmi_range_lower_limit %>
+    <%= form.select :category, BmiRange.categories.keys, {}, include_blank: true, class: "form-control first" %>
   </div>
 
   <div class="field">
-    <%= form.label :upper_limit %>
-    <%= form.text_field :upper_limit, id: :bmi_range_upper_limit %>
+    <%= form.number_field(:lower_limit, id: :bmi_range_lower_limit, step: :any, class: "form-control normal") %>
   </div>
 
   <div class="field">
-    <%= form.label :category %>
-    <%= form.number_field :category, id: :bmi_range_category %>
+    <%= form.number_field(:upper_limit, id: :bmi_range_upper_limit, step: :any, class: "form-control last") %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+
+  <div class="field">
+    <%= form.submit("save", class: "btn btn-primary form-control") %>
   </div>
 <% end %>

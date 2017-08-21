@@ -38,6 +38,12 @@ gem 'carrierwave', '~> 1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# UI stuff
+gem 'jquery-rails'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

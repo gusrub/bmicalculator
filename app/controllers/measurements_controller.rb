@@ -10,6 +10,7 @@ class MeasurementsController < ApplicationController
   # GET /measurements/1
   # GET /measurements/1.json
   def show
+    render :edit
   end
 
   # GET /measurements/new

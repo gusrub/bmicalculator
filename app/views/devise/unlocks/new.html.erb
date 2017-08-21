@@ -1,0 +1,17 @@
+<%= render "devise/shared/errors" %>
+
+<h2>Resend unlock instructions</h2>
+
+<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: "form-small" }) do |f| %>
+
+  <div class="field">
+    <%= f.label(:email, class: "sr-only") %>
+    <%= f.email_field(:email, autofocus: true, class: "form-control", placeholder: "email") %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.submit("unlock account", class: "btn btn-primary form-control") %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

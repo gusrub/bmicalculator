@@ -1,57 +1,31 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: user, local: true, class: "form-small") do |form| %>
 
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :user_email %>
+    <%= form.text_field(:first_name, id: :user_first_name, class: "form-control first", placeholder: "first name") %>
   </div>
 
   <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name, id: :user_first_name %>
+    <%= form.text_field(:last_name, id: :user_last_name, class: "form-control normal", placeholder:"last name") %>
   </div>
 
   <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name, id: :user_last_name %>
+    <%= form.text_field(:email, id: :user_email, class: "form-control normal", placeholder: "email") %>
   </div>
 
   <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password, id: :user_password %>
+    <%= form.date_field(:dob, class: "form-control normal", placeholder: "date of birth") %>
   </div>
 
   <div class="field">
-    <%= form.label :dob %>
-    <%= form.date_select :dob, id: :user_dob %>
+    <%= form.select :gender, User.genders.keys, {}, include_blank: true, class: "form-control normal" %>
   </div>
 
   <div class="field">
-    <%= form.label :gender %>
-    <%= form.number_field :gender, id: :user_gender %>
+    <%= form.select :role, User.roles.keys, {}, include_blank: true, class: "form-control last" %>
   </div>
-
+  <br />
   <div class="field">
-    <%= form.label :role %>
-    <%= form.number_field :role, id: :user_role %>
+    <%= form.submit("save", class: "btn btn-primary form-control") %>
   </div>
 
-  <div class="field">
-    <%= form.label :picture %>
-    <%= form.text_area :picture, id: :user_picture %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
