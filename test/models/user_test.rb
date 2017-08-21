@@ -37,9 +37,4 @@ class UserTest < ActiveSupport::TestCase
     validates_inclusion(:gender, User.genders.keys)
   end
 
-  test "validates role" do
-    validates_presence(:role)
-    validates_inclusion(:role, User.roles.keys)
-  end
-
 end

@@ -4,12 +4,22 @@ class BmiRangesController < ApplicationController
   # GET /bmi_ranges
   # GET /bmi_ranges.json
   def index
-    @bmi_ranges = BmiRange.all
+    @current_page = current_page
+    @search = params[:search]
+
+  if @search.present?
+      @pages = BmiRange.search(@search).pages
+      @bmi_ranges = BmiRange.search(@search).page(current_page)
+    else
+      @pages = BmiRange.pages
+      @bmi_ranges = BmiRange.page(current_page)
+    end
   end
 
   # GET /bmi_ranges/1
   # GET /bmi_ranges/1.json
   def show
+    render :edit
   end
 
   # GET /bmi_ranges/new

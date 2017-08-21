@@ -1,5 +1,7 @@
 class BmiRange < ApplicationRecord
 
+  include Concerns::Paginable
+
   enum category: {
     very_severely_underweight: 0,
     severely_underweight: 1,
@@ -17,5 +19,9 @@ class BmiRange < ApplicationRecord
   end
 
   validates :category, presence: true, inclusion: { in: self.categories.keys }, uniqueness: true
+
+  scope :search, ->(term) {
+    where(category: BmiRange.categories.find_all {|cat| cat[0] =~ /#{term.downcase}/}.to_h.values)
+  }
 
 end

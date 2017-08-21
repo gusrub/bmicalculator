@@ -1,0 +1,48 @@
+<%= render "devise/shared/errors" %>
+
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-small"}) do |f| %>
+
+  <div class="field <%= resource.errors.include?(:first_name) ? 'has-error' : nil %>">
+    <%= f.label(:first_name, class: "sr-only") %>
+    <%= f.text_field(:first_name, autofocus: true, class: "form-control first", placeholder: resource.errors.include?(:first_name) ? resource.errors[:first_name].join(', ') : "first name" ) %>
+  </div>
+
+  <div class="field <%= resource.errors.include?(:last_name) ? 'has-error' : nil %>">
+    <%= f.label(:last_name, class: "sr-only") %>
+    <%= f.text_field(:last_name, autofocus: true, class: "form-control normal", placeholder: resource.errors.include?(:last_name) ? resource.errors[:last_name].join(', ') : "last name") %>
+  </div>
+
+  <div class="field <%= resource.errors.include?(:email) ? 'has-error' : nil %>">
+    <%= f.label(:email, class: "sr-only") %>
+    <%= f.email_field(:email, autofocus: true, class: "form-control normal", placeholder: resource.errors.include?(:email) ? resource.errors[:email].join(', ') : "email") %>
+  </div>
+
+  <div class="field <%= resource.errors.include?(:password) ? 'has-error' : nil %>">
+    <%= f.label(:password, class: "sr-only") %>
+    <%= f.password_field(:password, autocomplete: "off", class: "form-control normal", placeholder: resource.errors.include?(:password) ? resource.errors[:password].join(', ') : "password") %>
+  </div>
+
+  <div class="field <%= resource.errors.include?(:password_confirmation) ? 'has-error' : nil %>">
+    <%= f.label(:password_confirmation, class: "sr-only") %>
+    <%= f.password_field(:password_confirmation, autocomplete: "off", class: "form-control normal", placeholder: resource.errors.include?(:password_confirmation) ? resource.errors[:password_confirmation].join(', ') : "password confirmation") %>
+  </div>
+
+  <div class="field <%= resource.errors.include?(:gender) ? 'has-error' : nil %>">
+    <%= f.label(:gender, class: "sr-only") %>
+    <%= f.select(:gender, User.genders.keys, {}, include_blank: true, class: "form-control normal") %>
+  </div>
+
+  <div class="field <%= resource.errors.include?(:dob) ? 'has-error' : nil %>">
+    <%= f.label(:dob, class: "sr-only") %>
+    <%= f.date_field(:dob, autofocus: true, class: "form-control last", placeholder: resource.errors.include?(:dob) ? resource.errors[:dob].join(', ') : "date of birth") %>
+  </div>
+
+  <br/ >
+  <div class="field">
+    <%= f.submit("Sign up", class: "btn btn-primary form-control") %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

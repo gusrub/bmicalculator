@@ -4,17 +4,22 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @current_page = current_page
+    @search = params[:search]
+
+    if @search.present?
+      @pages = User.search(@search).pages
+      @users = User.search(@search).page(current_page)
+    else
+      @pages = User.pages
+      @users = User.page(current_page)
+    end    
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
+    render :edit
   end
 
   # GET /users/1/edit
@@ -27,7 +32,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.json { render :edit, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }

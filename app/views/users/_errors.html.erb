@@ -1,0 +1,6 @@
+<% if @user.errors.present? %>
+  <div class="alert alert-warning alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <%= @user.errors.full_messages.join(", ") %>
+  </div>
+<% end %> 
