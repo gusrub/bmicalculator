@@ -13,6 +13,13 @@ class BmiRange < ApplicationRecord
     obese_class_3: 7
   }
 
+  enum risk: {
+    normal_risk: 0,
+    average_risk: 1,
+    important_risk: 2,
+    severe_risk: 3
+  }
+
   with_options presence: true, numericality: { greater_than_or_equal_to: 0 } do
     validates :upper_limit
     validates :lower_limit

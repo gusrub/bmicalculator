@@ -8,5 +8,6 @@ FactoryGirl.define do
         break sample unless BmiRange.exists?(category: sample)
       end
     end
+    risk { BmiRange.risks.keys.sample }
   end
 end

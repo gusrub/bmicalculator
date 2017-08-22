@@ -7,7 +7,7 @@ class BmiRangesController < ApplicationController
     @current_page = current_page
     @search = params[:search]
 
-  if @search.present?
+    if @search.present?
       @pages = BmiRange.search(@search).pages
       @bmi_ranges = BmiRange.search(@search).page(current_page)
     else
@@ -79,6 +79,6 @@ class BmiRangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bmi_range_params
-      params.require(:bmi_range).permit(:lower_limit, :upper_limit, :category)
+      params.require(:bmi_range).permit(:lower_limit, :upper_limit, :category, :risk)
     end
 end

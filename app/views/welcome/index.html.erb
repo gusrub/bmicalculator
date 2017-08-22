@@ -1,5 +1,66 @@
 <h1 class="cover-heading">Calculate your BMI</h1>
-<p class="lead">Body Mass Index or <a href="https://en.wikipedia.org/wiki/Body_mass_index">BMI</a> for short is an attempt to quantify the amount of tissue mass (muscle, fat, and bone) in an individual, and then categorize that person as underweight, normal weight, overweight, or obese based on that value.</p>
-<p class="lead">
-  <a href="#" class="btn btn-lg btn-default">Calculate</a>
-</p>
+<div id="intro">
+  <p class="lead">Body Mass Index or <a href="https://en.wikipedia.org/wiki/Body_mass_index">BMI</a> for short is an attempt to quantify the amount of tissue mass (muscle, fat, and bone) in an individual, and then categorize that person as underweight, normal weight, overweight, or obese based on that value.</p>
+  <p class="lead">
+    <% if user_signed_in? %>
+    <a href="#" class="btn btn-lg btn-primary" id="btn-intro">Calculate</a>
+    <% else %>
+    <%= link_to "Calculate", new_user_session_path, class: "btn btn-lg btn-primary"  %>
+    <% end %>
+  </p>
+</div>
+
+<div id="calculator">
+  <div class="alert alert-warning alert-dismissible" role="alert" id="calculation-errors">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="calculation-error-msg">Some message</p>
+  </div>
+  <form class="form-small" id="frm-calculation">
+  <div class="field">
+    <input type="text" name="weight" id="weight" placeholder="your weight in kg" class="form-control first" />
+    <input type="text" name="height" id="height" placeholder="your height in cm" class="form-control last" />
+  </div>
+  <div class="field">
+    <a href="#" class="btn btn-primary form-control" id="btn-calculate">calculate</a>
+  </div>
+  <br />
+  <div class="field">
+    <%= link_to("my history", measurements_path) %> |
+    <a href="#" id="btn-return-intro">back</a>
+  </div>
+  </form>
+</div>
+
+<div id="results">
+  <table class="table">
+    <thead>
+      <th class="text-left">Category</th>
+      <th class="text-center">Lower Limit</th>
+      <th class="text-center">Upper Limit</th>
+      <th class="text-center">Risk</th>
+    </thead>
+    <tbody>
+    <% @bmi_ranges.each do |range| %>
+      <%
+        risk = "default"
+        if range.normal_risk?
+          risk = "success"
+        elsif range.average_risk?
+          risk = "warning"
+        elsif range.important_risk?
+          risk = "warning"
+        elsif range.severe_risk?
+          risk = "danger"
+        end
+      %>
+      <tr id="cat_<%= range.category %>">
+        <td class="text-left"><%= range.category.humanize %></td>
+        <td class="text-center"><%= range.lower_limit %></td>
+        <td class="text-center"><%= range.upper_limit %></td>
+        <td class="text-center"><span class="label label-<%= risk %>"><%= range.risk.humanize %></span></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+   <a href="#" id="btn-return-result">back</a>
+</div>

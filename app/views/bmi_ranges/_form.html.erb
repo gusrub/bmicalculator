@@ -9,9 +9,12 @@
   </div>
 
   <div class="field">
-    <%= form.number_field(:upper_limit, id: :bmi_range_upper_limit, step: :any, class: "form-control last") %>
+    <%= form.number_field(:upper_limit, id: :bmi_range_upper_limit, step: :any, class: "form-control normal") %>
   </div>
 
+  <div class="field">
+    <%= form.select :risk, BmiRange.risks.keys, {}, include_blank: true, class: "form-control last" %>
+  </div>
 
   <div class="field">
     <%= form.submit("save", class: "btn btn-primary form-control") %>
