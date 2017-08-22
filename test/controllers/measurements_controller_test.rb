@@ -2,13 +2,16 @@ require 'test_helper'
 
 class MeasurementsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @height = 187
+    @weight = 81
     ranges = create_list(:bmi_range, BmiRange.categories.keys.count)
+    ranges.last.update_attributes(lower_limit: 20.0, upper_limit: 30.0)
+    user = create(:user)
+    sign_in_valid_user(user)
     ranges.each do |range|
-      create(:measurement, bmi_range: range)
+      create(:measurement, bmi_range: range, user: user)
     end
-    @measurement = Measurement.last
-    @new_measurement = build(:measurement)
-    sign_in_valid_user
+    @measurement = user.measurements.last
   end
 
   test "should get index" do
@@ -18,7 +21,7 @@ class MeasurementsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create measurement" do
     assert_difference('Measurement.count') do
-      post measurements_url, params: { format: :json, height: 187, weight: 81 }
+      post measurements_url, params: { format: :json, height: @height, weight: @weight }
     end
 
     assert_response :success
