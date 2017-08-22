@@ -16,32 +16,17 @@ class MeasurementsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_measurement_url
-    assert_response :success
-  end
-
   test "should create measurement" do
     assert_difference('Measurement.count') do
-      post measurements_url, params: { measurement: { bmi_range_id: @new_measurement.bmi_range_id, user_id: @new_measurement.user_id } }
+      post measurements_url, params: { format: :json, height: 187, weight: 81 }
     end
 
-    assert_redirected_to measurement_url(Measurement.last)
+    assert_response :success
   end
 
   test "should show measurement" do
-    get measurement_url(@measurement)
+    get measurement_url(@measurement), params: { format: :json }
     assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_measurement_url(@measurement)
-    assert_response :success
-  end
-
-  test "should update measurement" do
-    patch measurement_url(@measurement), params: { measurement: { bmi_range_id: @measurement.bmi_range_id, user_id: @measurement.user_id } }
-    assert_redirected_to measurement_url(@measurement)
   end
 
   test "should destroy measurement" do

@@ -4,50 +4,38 @@ class MeasurementsController < ApplicationController
   # GET /measurements
   # GET /measurements.json
   def index
-    @measurements = Measurement.all
+    @current_page = current_page
+    @search = params[:search]
+
+    if @search.present?
+      @pages = Measurement.order(created_at: :desc).search(@search).pages
+      @measurements = Measurement.order(created_at: :desc).search(@search).page(current_page)
+    else
+      @pages = Measurement.pages
+      @measurements = Measurement.page(current_page).order(created_at: :desc)
+    end
   end
 
   # GET /measurements/1
   # GET /measurements/1.json
   def show
-    render :edit
-  end
-
-  # GET /measurements/new
-  def new
-    @measurement = Measurement.new
-  end
-
-  # GET /measurements/1/edit
-  def edit
+    render :show
   end
 
   # POST /measurements
   # POST /measurements.json
   def create
-    @measurement = Measurement.new(measurement_params)
+    height = measurement_params[:height]
+    weight = measurement_params[:weight]
+
+    service = Measurements::CreateMeasurementService.new(user: current_user, weight: weight, height: height)
 
     respond_to do |format|
-      if @measurement.save
-        format.html { redirect_to @measurement, notice: 'Measurement was successfully created.' }
-        format.json { render :show, status: :created, location: @measurement }
+      if service.perform
+        @measurement = service.output
+        format.json { render :show, status: :created }
       else
-        format.html { render :new }
-        format.json { render json: @measurement.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /measurements/1
-  # PATCH/PUT /measurements/1.json
-  def update
-    respond_to do |format|
-      if @measurement.update(measurement_params)
-        format.html { redirect_to @measurement, notice: 'Measurement was successfully updated.' }
-        format.json { render :show, status: :ok, location: @measurement }
-      else
-        format.html { render :edit }
-        format.json { render json: @measurement.errors, status: :unprocessable_entity }
+        format.json { render json: service.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,6 +58,6 @@ class MeasurementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def measurement_params
-      params.require(:measurement).permit(:user_id, :bmi_range_id)
+      params.permit(:height, :weight)
     end
 end

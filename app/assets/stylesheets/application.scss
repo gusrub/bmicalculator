@@ -179,3 +179,19 @@ body {
     width: 700px;
   }
 }
+
+#calculator {
+  display: none;
+}
+
+#calculation-errors {
+  display: none;
+}
+
+#results {
+  display: none;
+}
+
+tr.highlighted-result > td {
+  color: #333;
+}

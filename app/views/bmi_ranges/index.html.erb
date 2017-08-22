@@ -15,7 +15,8 @@
       <th class="text-left">Category</th>
       <th class="text-left">Lower limit</th>
       <th class="text-left">Upper limit</th>
-      <th colspan="3"></th>
+      <th class="text-left">Risk</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -25,6 +26,7 @@
         <td class="text-left"><%= bmi_range.category.humanize %></td>
         <td class="text-left"><%= bmi_range.lower_limit %></td>
         <td class="text-left"><%= bmi_range.upper_limit %></td>
+        <td class="text-left"><%= bmi_range.risk %></td>
         <td class="text-left"><%= link_to 'edit', edit_bmi_range_path(bmi_range) %></td>
         <td class="text-left"><%= link_to 'delete', bmi_range, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
