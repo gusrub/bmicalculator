@@ -8,11 +8,11 @@ class MeasurementsController < ApplicationController
     @search = params[:search]
 
     if @search.present?
-      @pages = Measurement.order(created_at: :desc).search(@search).pages
-      @measurements = Measurement.order(created_at: :desc).search(@search).page(current_page)
+      @pages = current_user.measurements.order(created_at: :desc).search(@search).pages
+      @measurements = current_user.measurements.order(created_at: :desc).search(@search).page(current_page)
     else
-      @pages = Measurement.pages
-      @measurements = Measurement.page(current_page).order(created_at: :desc)
+      @pages = current_user.measurements.pages
+      @measurements = current_user.measurements.page(current_page).order(created_at: :desc)
     end
   end
 
@@ -53,7 +53,7 @@ class MeasurementsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_measurement
-      @measurement = Measurement.find(params[:id])
+      @measurement = current_user.measurements.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

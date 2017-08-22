@@ -13,8 +13,8 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  def sign_in_valid_user
-    user = create(:user)
+  def sign_in_valid_user(user = nil)
+    user ||= create(:user)
     user.confirm
     sign_in user
   end

@@ -8,7 +8,7 @@ class BmiRangesControllerTest < ActionDispatch::IntegrationTest
     @bmi_range = BmiRange.last
     @new_bmi_range = build(:bmi_range, category: BmiRange.categories[:obese_class_3])
 
-    sign_in_valid_user
+    sign_in_valid_user(create(:user, role: User.roles[:admin]))
   end
 
   test "should get index" do

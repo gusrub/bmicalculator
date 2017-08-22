@@ -30,8 +30,10 @@
                 <ul class="nav masthead-nav">
                   <li class="<%= request.path == '/' ? 'active' : nil %>"><%= link_to "Calculate", root_path %></li>
                   <li class="<%= request.path == '/whatisit' ? 'active' : nil %>"><%= link_to "What is it?", whatisit_path %></li>
+                  <% if current_user.try(:admin?) %>
                   <li class="<%= request.path == '/bmi_ranges' ? 'active' : nil %>"><%= link_to "Ranges", bmi_ranges_path %></li>
                   <li class="<%= request.path == '/users' ? 'active' : nil %>"><%= link_to "Users", users_path %></li>
+                  <% end %>
                   <% if user_signed_in? %>
                   <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
                   <% else %>

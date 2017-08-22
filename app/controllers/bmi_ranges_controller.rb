@@ -1,5 +1,6 @@
 class BmiRangesController < ApplicationController
   before_action :set_bmi_range, only: [:show, :edit, :update, :destroy]
+  before_action :authorize
 
   # GET /bmi_ranges
   # GET /bmi_ranges.json
@@ -81,4 +82,5 @@ class BmiRangesController < ApplicationController
     def bmi_range_params
       params.require(:bmi_range).permit(:lower_limit, :upper_limit, :category, :risk)
     end
+
 end

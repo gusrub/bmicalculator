@@ -4,7 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create_list(:user, 3).first
     @new_user = build(:user)
-    sign_in_valid_user
+    sign_in_valid_user(create(:user, role: User.roles[:admin]))
   end
 
   test "should get index" do
