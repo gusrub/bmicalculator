@@ -2,6 +2,8 @@
 
 This is a simple application that allows users to sign up and calculate their body mass index or short for [BMI](https://en.wikipedia.org/wiki/Body_mass_index), given their weight and heigh, based on [WHO](https://en.wikipedia.org/wiki/World_Health_Organization) standards.
 
+If you are seeing this page in the github wiki please go to the [bitbucket project page](https://bitbucket.org/gusrub/bmi-calculator) where it is really tracked.
+
 ## Dependencies
 
 This application uses the usual suspects: ruby, rails and postgres. There are no specific requirements other than running a recent version of ruby, preferably one above 2.1
