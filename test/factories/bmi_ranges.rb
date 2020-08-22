@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :bmi_range do
-    lower_limit { Faker::Number.between(0, 99.99) }
-    upper_limit { Faker::Number.between(0, 99.99) }
+    lower_limit { Faker::Number.between(from: 0, to: 99.99) }
+    upper_limit { Faker::Number.between(from: 0, to: 99.99) }
     category do
       loop do
         sample = BmiRange.categories.keys.sample
