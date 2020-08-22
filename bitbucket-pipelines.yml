@@ -16,7 +16,7 @@ pipelines:
           - bundle exec rails db:drop db:create db:migrate
           - bundle exec rspec
           - bundle exec rails assets:precompile
-          - bundle exec rails test          
+          - bundle exec rails test
   branches:
     master:
       - step:
@@ -49,5 +49,5 @@ definitions:
     postgres:
       image: postgres:11.2
       environment:
-        POSTGRES_DB: "bmicalculator"
-        POSTGRES_USER: "bmicalculator"
+        POSTGRES_DB: bmicalculator_test
+        POSTGRES_USER: bmicalculator
