@@ -14,7 +14,6 @@ pipelines:
           - gem install bundler
           - bundle install
           - bundle exec rails db:drop db:create db:migrate
-          - bundle exec rspec
           - bundle exec rails assets:precompile
           - bundle exec rails test
   branches:
