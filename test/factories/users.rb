@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     email { Faker::Internet.safe_email }
     first_name { Faker::Name.first_name }
@@ -7,11 +7,11 @@ FactoryGirl.define do
     dob { Faker::Date.birthday }
     gender { User.genders.keys.sample }
     role { User.roles.keys.sample }
-    picture nil
+    picture { nil }
 
     factory :user_with_measurements do
       transient do
-        measurements_count 3
+        measurements_count { 3 }
       end
 
       after_create do |user, evaluator|

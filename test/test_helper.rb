@@ -5,7 +5,7 @@ require "minitest/reporters"
 Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
   include Devise::Test::IntegrationHelpers
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -81,7 +81,6 @@ end
 class MiniTest::Spec
   ActiveRecord::Migration.check_pending!
   DatabaseCleaner.strategy = :truncation
-  DatabaseCleaner.logger = Rails.logger
 
   before :each do
     DatabaseCleaner.start

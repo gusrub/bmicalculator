@@ -5,9 +5,15 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.2'
+gem 'rails', '~> 5.2.4'
+
+# Allows us to use per-environment configurations and have it ready as soon as
+# the app is loaded (e.g. before we initialize database etc.)
+gem 'dotenv-rails', groups: [:development, :test], require: 'dotenv/rails-now'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -51,8 +57,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'faker'
-  gem 'factory_girl_rails'
-  gem 'dotenv-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -60,6 +65,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'letter_opener'
+  gem 'awesome_print'
 end
 
 group :test do
