@@ -39,7 +39,7 @@ gem 'devise'
 gem 'postmark-rails'
 
 # CarrierWave for object storage
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
